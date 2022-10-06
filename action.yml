@@ -8,6 +8,8 @@ inputs:
   AWS_SECRET_ACCESS_KEY:
     required: true
     description: 'The secret key of your AWS Credentials'
+  CDK_DEFAULT_REGION: 
+    required: true
   domain:
     required: true
     description: 'Full qualified domain (eg: subdomain.example.com) where the site will be deployed'

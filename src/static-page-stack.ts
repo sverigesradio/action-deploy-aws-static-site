@@ -13,7 +13,7 @@ import {
 const env = {
   // Stack must be in us-east-1, because the ACM certificate for a
   // global CloudFront distribution must be requested in us-east-1.
-  region: "us-east-1",
+  region: "eu-north-1",
   account: process.env.CDK_DEFAULT_ACCOUNT ?? "mock",
 };
 
@@ -25,10 +25,12 @@ export class StaticPageStack extends cdk.Stack {
       stackName,
       folder,
       fullDomain,
+      arnCertificate,
     }: {
       stackName: string;
       folder: string;
       fullDomain: string;
+      arnCertificate?: string;
     }
   ) {
     super(scope, id, { stackName, env });
@@ -37,11 +39,11 @@ export class StaticPageStack extends cdk.Stack {
     const domain = getDomain(fullDomain);
 
     const zone = getDNSZone(this, domain);
-    const certificate = getCertificate(this, fullDomain, zone);
+    const certificate = getCertificate(this, fullDomain, zone, arnCertificate);
 
     const websiteBucket = new s3.Bucket(this, "WebsiteBucket", {
       websiteIndexDocument: "index.html",
-      websiteErrorDocument: "error.html",
+      websiteErrorDocument: "index.html",
       publicReadAccess: true,
     });
 

@@ -29,12 +29,20 @@ export function getDNSZone(
 export function getCertificate(
   scope: cdk.Stack,
   fullDomainName: string,
-  zone: route53.IHostedZone
+  zone: route53.IHostedZone,
+  certificateArn?: string
 ): cloudfront.ViewerCertificate {
-  const acmCert = new acm.DnsValidatedCertificate(scope, "SiteCert", {
-    domainName: fullDomainName,
-    hostedZone: zone,
-  });
+  let acmCert;
+
+  if (certificateArn) {
+    acmCert = acm.Certificate.fromCertificateArn(scope, "Certificate", certificateArn);
+  } else {
+    acmCert = new acm.DnsValidatedCertificate(scope, "SiteCert", {
+      domainName: fullDomainName,
+      hostedZone: zone,
+    });
+  }
+
   return cloudfront.ViewerCertificate.fromAcmCertificate(acmCert, {
     aliases: [fullDomainName],
   });

@@ -35,7 +35,11 @@ export function getCertificate(
   let acmCert;
 
   if (certificateArn) {
-    acmCert = acm.Certificate.fromCertificateArn(scope, "Certificate", certificateArn);
+    acmCert = acm.Certificate.fromCertificateArn(
+      scope,
+      "Certificate",
+      certificateArn
+    );
   } else {
     acmCert = new acm.DnsValidatedCertificate(scope, "SiteCert", {
       domainName: fullDomainName,

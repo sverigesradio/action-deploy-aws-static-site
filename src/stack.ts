@@ -14,5 +14,5 @@ new StaticPageStack(app, `StaticPage`, {
   stackName: `StaticPage-${DOMAIN}`.split(".").join("-"),
   folder: FOLDER,
   fullDomain: DOMAIN,
-  arnCertificate: CERT_ARN
+  arnCertificate: CERT_ARN,
 });

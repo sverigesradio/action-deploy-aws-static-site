@@ -16,6 +16,7 @@
   with:
     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    region: eu-north-1
     certificate_arn: arn:partition:service:region:account-id:resource-type/resource-id
     domain: subdomain.example.com
     publish_dir: ./public
